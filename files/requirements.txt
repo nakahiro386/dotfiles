@@ -1,0 +1,4 @@
+pipenv
+jedi
+pynvim
+git-cu

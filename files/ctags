@@ -1,0 +1,3 @@
+--langmap=cobol:+.pco
+--jcode=utf8
+--recurse=yes

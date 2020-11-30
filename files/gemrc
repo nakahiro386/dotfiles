@@ -1,0 +1,12 @@
+---
+install: --user-install --no-document
+update: --user-install --no-document
+gem: --user-install --no-document
+:backtrace: false
+:bulk_threshold: 1000
+:sources:
+- https://rubygems.org/
+:update_sources: true
+:verbose: true
+:benchmark: false
+:LANG: ja_JP.UTF-8

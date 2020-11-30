@@ -1,0 +1,33 @@
+[user]
+	name = nakahiro386
+	email = nakahiro386@gmail.com
+[core]
+	editor = vim
+	autocrlf = false
+	whitespace = -trailing-space,-space-before-tab,-indent-with-non-tab,-cr-at-eol
+	quotepath = off
+[color]
+	ui = auto
+[http]
+	postBuffer = 52428800
+[alias]
+	co = checkout
+	l = log --oneline --graph --pretty=format:\"%C(red)%h %C(green)%an %C(yellow)%cd %Creset%s %C(yellow)%d%Creset\" --date=format:'%Y/%m/%d %H:%M:%S'
+	ll = log --graph --name-status --pretty=format:\"%C(red)%h %C(green)%an %Creset%s %C(yellow)%d%Creset\"
+	sts = status
+	ss = status -s -b
+[merge]
+	tool = gvimdiff3
+[mergetool "gvimdiff3"]
+	cmd = gvim -f -d -c \"wincmd J\" \"$MERGED\" \"$LOCAL\" \"$BASE\" \"$REMOTE\"
+	trustExitCode = false
+[diff]
+	tool = gvimdiff
+[difftool "gvimdiff"]
+	cmd = gvim -f -d \"$LOCAL\" \"$REMOTE\"
+	trustExitCode = false
+[gui]
+	encoding = utf-8
+[push]
+	default = simple
+; vim:set filetype=gitconfig:

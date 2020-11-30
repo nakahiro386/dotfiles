@@ -1,0 +1,87 @@
+" %HOMEDRIVE%%HOMEPATH%\.vrapperrc
+"   source /RepositoryPath/dotfiles/.vrapperrc
+
+set clipboard=unnamed
+set ignorecase
+set hlsearch
+nnoremap <Esc> :set nohlsearch<cr>
+
+noremap  s       <Nop>
+noremap  gs      <Nop>
+noremap  S       <Nop>
+noremap  Q       <Nop>
+noremap  ZZ      <Nop>
+noremap  ZQ      <Nop>
+noremap  gQ      <Nop>
+noremap  ,       <Nop>
+noremap  <Space> <Nop>
+noremap  <C-z>   <Nop>
+noremap  <F1>    <Nop>
+noremap  <C-p>   <Nop>
+noremap! <F1>    <Nop>
+noremap! <C-z>   <Nop>
+noremap! <C-@>   <Nop>
+
+noremap : ;
+noremap ; :
+noremap q; q:
+
+noremap Y y$
+nnoremap y% :<C-u>%y<CR>
+nnoremap d% :<C-u>%d _<CR>
+
+noremap <Del> "xx
+noremap x "xx
+noremap X "xD
+
+nnoremap d "dd
+vnoremap d "dd
+noremap D "dD
+
+nnoremap c "cc
+vnoremap c "cc
+noremap C "cC
+
+nnoremap dp "dp
+nnoremap dP "dP
+nnoremap cp "cp
+nnoremap cP "cP
+
+noremap! <C-k> <Del>
+nnoremap > >>
+nnoremap < <<
+vnoremap > >gv
+vnoremap < <gv
+vmap <Tab> >
+vmap <S-Tab> <
+
+nnoremap <Space>wr :w<CR>
+nnoremap sh ^
+vnoremap sh ^
+nnoremap sl $
+vnoremap sl $h
+vnoremap sa oggoG
+
+nnoremap <Space>bn :<C-u>bn<CR>
+nnoremap <Space>bp :<C-u>bp<CR>
+nnoremap <Space><Space> :<C-u>bn<CR>
+nnoremap <S-Space><S-Space> :<C-u>bp<CR>
+
+nnoremap <Space>h :<C-u>bp<CR>
+nnoremap <Space>l :<C-u>bn<CR>
+
+nnoremap <Space>q :bd<CR>
+nnoremap <Space>Q :bd!<CR>
+
+noremap U <C-R>
+noremap <Space>U U
+
+nnoremap * :set hlsearch<cr>*
+nnoremap { {zz
+nnoremap } }zz
+
+noremap zz z<CR>
+noremap z<CR> zz
+
+
+noremap  <C-S-v> <C-v>

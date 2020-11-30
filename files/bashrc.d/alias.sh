@@ -1,0 +1,5 @@
+alias rm="rm -i"
+alias cp="cp -i"
+alias mv="mv -i"
+alias docker="sudo docker"
+alias docker-compose="sudo /usr/local/bin/docker-compose"

@@ -1,0 +1,3 @@
+bin/*
+!bin/.gitkeep
+files/vifm/vifminfo.json

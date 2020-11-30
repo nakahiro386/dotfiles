@@ -1,0 +1,7 @@
+#!/bin/sh
+
+if [ -n "$VIM_TERMINAL" ]; then
+    /bin/echo -e "\x1b]51;[\"drop\",\"`gof`\"]\x07"
+else
+    vim $@
+fi

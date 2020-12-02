@@ -1,14 +1,36 @@
 # default_values = YAML.load(File.read("#{File.dirname(__FILE__)}/anyenv.yaml"))
 
+SCRIPT_PATH = File.expand_path(__FILE__)
+
+define :managed_file, fragment: nil, comment: nil do
+  comment = params[:comment]
+  fragment_start = "#{comment} mitamae managed #{SCRIPT_PATH} START"
+  fragment_end = "#{comment} mitamae managed #{SCRIPT_PATH} END"
+  fragment = <<-"EOS"
+#{fragment_start}
+#{params[:fragment].chomp}
+#{fragment_end}
+  EOS
+  mitamae_managed = /^#{Regexp.escape(fragment_start)}.+#{Regexp.escape(fragment_end)}\n/im
+
+  file params[:name] do
+    action [:create, :edit]
+    block do |content|
+      if content =~ mitamae_managed
+        content.gsub!(mitamae_managed, fragment)
+      else
+        content << fragment
+      end
+    end
+  end
+end
+
 def dir_entries(path)
   entries = Dir.entries(path)
   entries.delete('.')
   entries.delete('..')
   return entries
 end
-
-SCRIPT_PATH = File.expand_path(__FILE__)
-MITAMAE_MANAGED = /^[^\n]*mitamae managed #{Regexp.escape(SCRIPT_PATH)} START.+mitamae managed #{Regexp.escape(SCRIPT_PATH)} END\n/im
 
 cwd = File.expand_path("..", __FILE__)
 files = File.join(cwd, 'files')
@@ -33,27 +55,16 @@ config_pip = File.join(config, 'pip')
 end
 
 # git_config
-git_include = <<"EOS"
-; mitamae managed #{SCRIPT_PATH} START
+managed_file File.join(home, '.gitconfig') do
+  fragment <<-"EOS"
 [include]
 	path = #{File.join(files, 'gitconfig')}
-; mitamae managed #{SCRIPT_PATH} END
-EOS
-
-file "#{File.join(home, '.gitconfig')}" do
-  action :edit
-  block do |content|
-    if content =~ MITAMAE_MANAGED
-      content.gsub!(MITAMAE_MANAGED, git_include)
-    else
-      content << git_include
-    end
-  end
+  EOS
+  comment ";"
 end
 
-def add_fragment(target_file, fragment_dir)
-  fragment = <<-"EOS"
-# mitamae managed #{SCRIPT_PATH} START
+def get_bash_fragment(fragment_dir)
+  return <<-"EOS"
 fragment_dir="#{fragment_dir}"
 if [ -d ${fragment_dir} ] ; then
     for f in ${fragment_dir}/* ; do
@@ -62,19 +73,7 @@ if [ -d ${fragment_dir} ] ; then
     unset f
 fi
 unset fragment_dir
-# mitamae managed #{SCRIPT_PATH} END
   EOS
-
-  file target_file do
-    action :edit
-    block do |content|
-      if content =~ MITAMAE_MANAGED
-        content.gsub!(MITAMAE_MANAGED, fragment)
-      else
-        content << fragment
-      end
-    end
-  end
 end
 
 # .profile .bash_profile
@@ -83,48 +82,35 @@ profile_path = File.exist?(_bash_profile_path) ?
   _bash_profile_path :
   File.join(home, '.profile')
 
-profile_fragment_dir = File.join(files, 'bash_profile.d')
-add_fragment(profile_path, profile_fragment_dir)
+profile_fragment = get_bash_fragment(File.join(files, 'bash_profile.d'))
+managed_file profile_path do
+  fragment profile_fragment
+  comment "#"
+end
 
 # .bashrc
-bashrc_path = File.join(home, '.bashrc')
-bashrc_fragment_dir = File.join(files, 'bashrc.d')
-add_fragment(bashrc_path, bashrc_fragment_dir)
+bashrc_fragment = get_bash_fragment(File.join(files, 'bashrc.d'))
+managed_file File.join(home, '.bashrc') do
+  fragment bashrc_fragment
+  comment "#"
+end
 
 # tmux.conf
-tmux_include = <<"EOS"
-# mitamae managed #{SCRIPT_PATH} START
-source-file #{File.join(files, 'tmux.conf')}
-# mitamae managed #{SCRIPT_PATH} END
-EOS
-
-file "#{File.join(home, '.tmux.conf')}" do
-  action :edit
-  block do |content|
-    unless content =~ /#{Regexp.escape(tmux_include)}/
-      content << tmux_include
-    end
-  end
+managed_file File.join(home, '.tmux.conf') do
+  fragment "source-file #{File.join(files, 'tmux.conf')}"
+  comment "#"
 end
 
 # pip.conf
-pip_conf = <<"EOS"
-; mitamae managed #{SCRIPT_PATH} START
+managed_file File.join(config_pip, 'pip.conf') do
+  fragment <<-"EOS"
 [list]
 format=columns
 [install]
 user = no
 no-warn-script-location = no
-; mitamae managed #{SCRIPT_PATH} END
-EOS
-file File.join(config_pip, 'pip.conf') do
-  action :edit
-  mode '0600'
-  block do |content|
-    unless content =~ /#{Regexp.escape(pip_conf)}/
-      content << pip_conf
-    end
-  end
+  EOS
+  comment ";"
 end
 
 # vifm

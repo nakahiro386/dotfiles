@@ -122,7 +122,7 @@ end
 # bin
 dir_entries(File.join(files, 'bin')).each do |b|
   link File.join(home, 'bin', b) do
-    to b
+    to File.join(files, 'bin', b)
     force true
   end
 end

@@ -12,8 +12,8 @@
 	postBuffer = 52428800
 [alias]
 	co = checkout
-	l = log --oneline --graph --pretty=format:\"%C(red)%h %C(green)%an %C(yellow)%cd %Creset%s %C(yellow)%d%Creset\" --date=format:'%Y/%m/%d %H:%M:%S'
-	ll = log --graph --name-status --pretty=format:\"%C(red)%h %C(green)%an %Creset%s %C(yellow)%d%Creset\"
+	l = log --oneline --graph --pretty=format:\"%C(red)%h %C(green)%an(%G?) %C(yellow)%cd %Creset%s %C(yellow)%d%Creset\" --date=format:'%Y/%m/%d %H:%M:%S'
+	ll = log --graph --name-status --pretty=format:\"%C(red)%h %C(green)%an(%G?) %Creset%s %C(yellow)%d%Creset\"
 	sts = status
 	ss = status -s -b
 [merge]

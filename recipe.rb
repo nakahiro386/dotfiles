@@ -126,3 +126,15 @@ dir_entries(File.join(files, 'bin')).each do |b|
     force true
   end
 end
+
+# vimfiles
+vimfiles = File.join(home, 'repo/github.com/nakahiro386/vimfiles')
+git "#{vimfiles}" do
+  repository "https://github.com/nakahiro386/vimfiles.git"
+  revision "master"
+  not_if "test -d #{vimfiles}"
+end
+
+link File.join(home, '.vim') do
+  to vimfiles
+end

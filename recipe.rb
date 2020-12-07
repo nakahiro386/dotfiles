@@ -2,7 +2,7 @@
 
 SCRIPT_PATH = File.expand_path(__FILE__)
 
-define :managed_file, fragment: nil, comment: nil do
+define :managed_file, fragment: nil, comment: nil, insertbefore: false do
   comment = params[:comment]
   fragment_start = "#{comment} mitamae managed #{SCRIPT_PATH} START"
   fragment_end = "#{comment} mitamae managed #{SCRIPT_PATH} END"
@@ -19,7 +19,7 @@ define :managed_file, fragment: nil, comment: nil do
       if content =~ mitamae_managed
         content.gsub!(mitamae_managed, fragment)
       else
-        content << fragment
+        content.insert(params[:insertbefore] ? 0 : -1, fragment)
       end
     end
   end
@@ -61,6 +61,7 @@ managed_file File.join(home, '.gitconfig') do
 	path = #{File.join(files, 'gitconfig')}
   EOS
   comment ";"
+  insertbefore true
 end
 
 def get_bash_fragment(fragment_dir)
@@ -99,6 +100,7 @@ end
 managed_file File.join(home, '.tmux.conf') do
   fragment "source-file #{File.join(files, 'tmux.conf')}"
   comment "#"
+  insertbefore true
 end
 
 # pip.conf

@@ -13,7 +13,7 @@
 [alias]
 	co = checkout
 	l = log --oneline --graph --pretty=format:\"%C(red)%h %C(green)%an(%G?) %C(yellow)%cd %Creset%s %C(yellow)%d%Creset\" --date=format:'%Y/%m/%d %H:%M:%S'
-	ll = log --graph --name-status --pretty=format:\"%C(red)%h %C(green)%an(%G?) %Creset%s %C(yellow)%d%Creset\"
+	ll = log --graph --name-status --pretty=format:\"%C(red)%h %C(green)%an(%G?) %C(yellow)%cd %Creset%s %C(yellow)%d%Creset\" --date=format:'%Y/%m/%d %H:%M:%S'
 	sts = status
 	ss = status -s -b
 [merge]

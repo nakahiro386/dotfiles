@@ -505,7 +505,11 @@ nnoremap <c-u> <c-w>x
 " ----------------------------------------------------------------------------
 set timefmt=" %Y/%m/%d %H:%M:%S"
 set statusline="  %t[%T] %S/%L %D %= %10y:%-7g %15s %20d [%a free]"
-set viewcolumns=-50%{name}..,-{target}..,12{perms},-9{gname},-9{uname},10{size},21{mtime}
+if has('win')
+    set viewcolumns=-50%{name}..,-{target}..,10{size},21{mtime}
+else
+    set viewcolumns=-50%{name}..,-{target}..,12{perms},-9{gname},-9{uname},10{size},21{mtime}
+endif
 set sizefmt=units:iec,precision:3
 set vifminfo=bmarks,bookmarks,tui,dhistory,state,cs,savedirs,chistory,
     \shistory,phistory,fhistory,dirstack,registers,tabs

@@ -529,6 +529,10 @@ nnoremap <space>q :quit<cr>
 
 nnoremap <space><space> <space>
 
+nnoremap <c-n> <space>
+nnoremap <c-p> <space>
+" nnoremap <c-i> :histnext<cr>
+
 nnoremap <space>ba :bmark<space>
 nnoremap <space>bb :bmarks<cr>
 

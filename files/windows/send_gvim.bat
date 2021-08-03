@@ -16,7 +16,12 @@ shift
 goto loop
 :end
 
-start "" /D %home% gvim.exe --literal --remote-tab-silent %ARGS%
+WHERE /q gvim.exe
+IF %ERRORLEVEL% == 0 (
+    start "" /D %home% gvim.exe --literal --remote-tab-silent %ARGS%
+) ELSE (
+    gvim.bat --literal --remote-tab-silent %ARGS%
+)
 
 
 ENDLOCAL

@@ -25,7 +25,7 @@ define :managed_file, fragment: nil, comment: nil, insertbefore: false do
   end
 end
 
-def dir_entries(path)
+def self.dir_entries(path)
   entries = Dir.entries(path)
   entries.delete('.')
   entries.delete('..')
@@ -64,7 +64,7 @@ managed_file File.join(home, '.gitconfig') do
   insertbefore true
 end
 
-def get_bash_fragment(fragment_dir)
+def self.get_bash_fragment(fragment_dir)
   return <<-"EOS"
 fragment_dir="#{fragment_dir}"
 if [ -d ${fragment_dir} ] ; then
@@ -83,14 +83,14 @@ profile_path = File.exist?(_bash_profile_path) ?
   _bash_profile_path :
   File.join(home, '.profile')
 
-profile_fragment = get_bash_fragment(File.join(files, 'bash_profile.d'))
+profile_fragment = self.get_bash_fragment(File.join(files, 'bash_profile.d'))
 managed_file profile_path do
   fragment profile_fragment
   comment "#"
 end
 
 # .bashrc
-bashrc_fragment = get_bash_fragment(File.join(files, 'bashrc.d'))
+bashrc_fragment = self.get_bash_fragment(File.join(files, 'bashrc.d'))
 managed_file File.join(home, '.bashrc') do
   fragment bashrc_fragment
   comment "#"
@@ -122,7 +122,7 @@ link File.join(config, 'vifm') do
 end
 
 # bin
-dir_entries(File.join(files, 'bin')).each do |b|
+self.dir_entries(File.join(files, 'bin')).each do |b|
   link File.join(home, 'bin', b) do
     to File.join(files, 'bin', b)
     force true

@@ -1,0 +1,3 @@
+[submodule "plugins/mitamae-plugin-recipe-anyenv"]
+	path = plugins/mitamae-plugin-recipe-anyenv
+	url = https://github.com/nakahiro386/mitamae-plugin-recipe-anyenv.git

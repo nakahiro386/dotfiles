@@ -3,7 +3,7 @@
 ## usage
 
 ```sh
-$ git clone https://github.com/nakahiro386/dotfiles.git ~/repo/github.com/nakahiro386/dotfiles
+$ git clone --recursive https://github.com/nakahiro386/dotfiles.git ~/repo/github.com/nakahiro386/dotfiles
 $ cd !$
 $ git remote set-url origin git@github.com:nakahiro386/dotfiles.git
 $ ./init.sh --dry-run

@@ -122,8 +122,12 @@ link File.join(config, 'vifm') do
 end
 
 # bin
+home_bin = File.join(home, 'bin')
+directory home_bin do
+  action :create
+end
 self.dir_entries(File.join(files, 'bin')).each do |b|
-  link File.join(home, 'bin', b) do
+  link File.join(home_bin, b) do
     to File.join(files, 'bin', b)
     force true
   end

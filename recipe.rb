@@ -116,6 +116,10 @@ no-warn-script-location = no
 end
 
 # config
+## jesseduffield/lazydockerが優先されるので削除する
+directory File.join(config, 'jesseduffield') do
+  action :delete
+end
 %w(vifm lazydocker).each do |d|
   link File.join(config, d) do
     to File.join(files, d)

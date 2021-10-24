@@ -1,3 +1,4 @@
 bin/*
 !bin/mitamae.sh
 files/vifm/vifminfo*
+files/lazydocker/development.log

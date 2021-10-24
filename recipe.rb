@@ -115,11 +115,14 @@ no-warn-script-location = no
   comment ";"
 end
 
-# vifm
-link File.join(config, 'vifm') do
-  to File.join(files, 'vifm')
-  force true
+# config
+%w(vifm lazydocker).each do |d|
+  link File.join(config, d) do
+    to File.join(files, d)
+    force true
+  end
 end
+
 
 # bin
 home_bin = File.join(home, 'bin')

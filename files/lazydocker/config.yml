@@ -1,0 +1,7 @@
+gui:
+  returnImmediately: true
+reporting: "on"
+commandTemplates:
+  dockerCompose: /usr/local/bin/docker-compose
+update:
+  dockerRefreshInterval: 1s

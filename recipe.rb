@@ -25,6 +25,25 @@ define :managed_file, fragment: nil, comment: nil, insertbefore: false do
   end
 end
 
+define :git_clone, repository: nil, revision: nil, recursive: true, depth: nil do
+  destination = params[:name]
+  repository = params[:repository]
+  revision = params[:revision]
+  recursive = params[:recursive]
+  depth = params[:depth]
+
+  cmd = ['git', 'clone']
+  cmd << '--recursive' if recursive
+  cmd += ['--depth', depth.to_s] if depth
+  cmd += ['--revision', revision] if revision
+  cmd << '--' << repository << destination
+
+  execute "git cloning into #{destination}" do
+    command cmd
+    not_if "test -d #{destination}"
+  end
+end
+
 def self.dir_entries(path)
   entries = Dir.entries(path)
   entries.delete('.')
@@ -142,10 +161,8 @@ end
 
 # vimfiles
 vimfiles = File.join(home, 'repo/github.com/nakahiro386/vimfiles')
-git "#{vimfiles}" do
+git_clone "#{vimfiles}" do
   repository "https://github.com/nakahiro386/vimfiles.git"
-  revision "master"
-  not_if "test -d #{vimfiles}"
 end
 
 link File.join(home, '.vim') do

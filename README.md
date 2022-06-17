@@ -14,7 +14,6 @@ $ ./install_anyenv.sh
 $ anyenv git co master
 
 $ cd ~/.vim
-$ git switch master
 $ git remote set-url origin git@github.com:nakahiro386/vimfiles.git
 
 ```

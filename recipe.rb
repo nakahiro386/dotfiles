@@ -63,10 +63,26 @@ p user_info
 home = user_info['directory']
 
 # dirs
+xdg_user_dirs = []
+
+local = File.join(home, '.local')
+xdg_user_dirs << local
+xdg_user_dirs << File.join(local, 'bin')
+xdg_user_dirs << File.join(local, 'src')
+xdg_user_dirs << File.join(local, 'lib')
+xdg_user_dirs << ENV['XDG_DATA_HOME'] ||= File.join(local, 'share')
+xdg_user_dirs << ENV['XDG_STATE_HOME'] ||= File.join(local, 'state')
+
+xdg_user_dirs << ENV['XDG_CACHE_HOME'] ||= File.join(home, '.cache')
+
 config = ENV['XDG_CONFIG_HOME']
 config ||= File.join(home, '.config')
+xdg_user_dirs << config
+
 config_pip = File.join(config, 'pip')
-[config, config_pip].each do |d|
+xdg_user_dirs << config_pip
+
+xdg_user_dirs.each do |d|
   directory d do
     action :create
     mode '0700'
@@ -145,7 +161,6 @@ end
     force true
   end
 end
-
 
 # bin
 home_bin = File.join(home, 'bin')

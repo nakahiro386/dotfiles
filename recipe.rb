@@ -66,7 +66,6 @@ xdg_user_dirs << config_pip
 xdg_user_dirs.each do |d|
   directory d do
     action :create
-    mode '0700'
   end
 end
 

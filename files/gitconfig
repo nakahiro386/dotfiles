@@ -1,6 +1,9 @@
 [user]
 	name = nakahiro386
 	email = nakahiro386@gmail.com
+	signingkey = BF0A84C125FB7548
+[commit]
+	gpgsign = true
 [core]
 	editor = vim
 	autocrlf = false

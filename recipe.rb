@@ -45,7 +45,13 @@ home = user_info['directory']
 
 # dirs
 xdg_user_dirs = []
-tmxu_use_xdg = run_command('printf "$(tmux -V | cut -d' ' -f2 )\n3.2" | sort -C -V', error: false).exit_status
+ret = run_command('printf "$(tmux -V | cut -d\' \' -f2 )\n3.2" | sort -C -V', error: false)
+tmxu_use_xdg = true
+if ret.stderr.empty?
+  tmxu_use_xdg = ret.exit_status == 1
+else
+  p ret.stderr
+end
 
 local = File.join(home, '.local')
 xdg_user_dirs << local

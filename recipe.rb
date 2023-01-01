@@ -45,6 +45,7 @@ home = user_info['directory']
 
 # dirs
 xdg_user_dirs = []
+tmxu_use_xdg = run_command('printf "$(tmux -V | cut -d' ' -f2 )\n3.2" | sort -C -V', error: false).exit_status
 
 local = File.join(home, '.local')
 xdg_user_dirs << local
@@ -62,6 +63,11 @@ xdg_user_dirs << config
 
 config_pip = File.join(config, 'pip')
 xdg_user_dirs << config_pip
+
+config_tmux = File.join(config, 'tmux')
+if tmxu_use_xdg
+  xdg_user_dirs << config_tmux
+end
 
 xdg_user_dirs.each do |d|
   directory d do
@@ -112,10 +118,18 @@ managed_file File.join(home, '.bashrc') do
 end
 
 # tmux.conf
-managed_file File.join(home, '.tmux.conf') do
-  fragment "source-file #{File.join(files, 'tmux.conf')}"
-  comment "#"
-  insertbefore true
+if tmxu_use_xdg
+  managed_file File.join(config_tmux, 'tmux.conf') do
+    fragment "source-file #{File.join(files, 'tmux.conf')}"
+    comment "#"
+    insertbefore true
+  end
+else
+  managed_file File.join(home, '.tmux.conf') do
+    fragment "source-file #{File.join(files, 'tmux.conf')}"
+    comment "#"
+    insertbefore true
+  end
 end
 
 # pip.conf

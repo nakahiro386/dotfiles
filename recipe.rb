@@ -75,6 +75,9 @@ if tmxu_use_xdg
   xdg_user_dirs << config_tmux
 end
 
+config_git = File.join(config, 'git')
+xdg_user_dirs << config_git
+
 xdg_user_dirs.each do |d|
   directory d do
     action :create
@@ -82,7 +85,7 @@ xdg_user_dirs.each do |d|
 end
 
 # git_config
-managed_file File.join(home, '.gitconfig') do
+managed_file File.join(config_git, 'config') do
   fragment <<-"EOS"
 [include]
 	path = #{File.join(files, 'gitconfig')}

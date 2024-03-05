@@ -58,18 +58,13 @@ xdg_user_dirs << local
 xdg_user_dirs << File.join(local, 'bin')
 xdg_user_dirs << File.join(local, 'src')
 xdg_user_dirs << File.join(local, 'lib')
+xdg_user_dirs << ENV['XDG_DATA_HOME'] ||= File.join(local, 'share')
 xdg_user_dirs << ENV['XDG_STATE_HOME'] ||= File.join(local, 'state')
+
 xdg_user_dirs << ENV['XDG_CACHE_HOME'] ||= File.join(home, '.cache')
 
-data_home = ENV['XDG_DATA_HOME'] ||= File.join(local, 'share')
-xdg_user_dirs << data_home
-
-xdg_user_dirs << File.join(data_home, 'bash-completion')
-data_home_bash_completion = File.join(data_home, 'bash-completion', 'completions')
-xdg_user_dirs << data_home_bash_completion
-
-
-config = ENV['XDG_CONFIG_HOME'] ||= File.join(home, '.config')
+config = ENV['XDG_CONFIG_HOME']
+config ||= File.join(home, '.config')
 xdg_user_dirs << config
 
 config_pip = File.join(config, 'pip')
@@ -198,7 +193,7 @@ git_clone "#{complete_alias}" do
   repository "https://github.com/cykerway/complete-alias.git"
 end
 
-managed_file File.join(data_home_bash_completion, 'complete-alias.bash') do
+managed_file File.join(home, '.bash_completion') do
   fragment "source #{File.join(complete_alias, 'complete_alias')}"
   comment "#"
   insertbefore true

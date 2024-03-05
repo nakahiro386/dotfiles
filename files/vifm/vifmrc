@@ -557,3 +557,7 @@ command! less less %f
 nnoremap E :less<cr>
 
 command! tvim  tvim %f:p
+
+if $TMUX != ''
+    screen!
+endif

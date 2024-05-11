@@ -2,9 +2,9 @@
 set -e
 
 bin_dir=$(cd "$(dirname $0)" && pwd)
-mitamae_version='1.12.10'
+mitamae_version='1.14.1'
 mitamae_bin="${bin_dir}/mitamae-x86_64-linux-${mitamae_version}"
-mitamae_sha256='c174931e3d6265ce2f266d80271c1f2b182354d4d75f3c5f849b167d6bc7a505'
+mitamae_sha256='ce5d10e2fde981707067da454aa845df02bdbcfba1ea2cba46b0ff1412f20016'
 mitamae_sha256_file="${bin_dir}/mitamae.sha256"
 
 if [ ! -e "${mitamae_bin}" ]; then

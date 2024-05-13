@@ -9,19 +9,14 @@ $ git remote set-url origin git@github.com:nakahiro386/dotfiles.git
 $ ./init.sh --dry-run
 $ ./init.sh
 
-$ ./install_anyenv.sh --dry-run
-$ ./install_anyenv.sh
-$ anyenv git co master
-
 $ cd ~/.vim
 $ git remote set-url origin git@github.com:nakahiro386/vimfiles.git
-
 ```
 
-## [jesseduffield/lazydocker](https://github.com/jesseduffield/lazydocker) のinstall
+## link
 
-* docker版の場合、volume mountしてもdocker-composeを利用できないためバイナリ版を利用する。
-```sh
-$ sudo curl https://raw.githubusercontent.com/jesseduffield/lazydocker/master/scripts/install_update_linux.sh | bash
-```
-
+* [itamae-kitchen/mitamae: mitamae is a fast, simple, and single-binary configuration management tool with a DSL like Chef](https://github.com/itamae-kitchen/mitamae)
+* [vim/vim-appimage: AppImage for gVim](https://github.com/vim/vim-appimage)
+* [vifm/vifm: Vifm is a file manager with curses interface, which provides Vim-like environment for managing objects within file systems, extended with some useful ideas from mutt.](https://github.com/vifm/vifm)
+* [jesseduffield/lazygit: simple terminal UI for git commands](https://github.com/jesseduffield/lazygit)
+* [nelsonenzo/tmux-appimage: Tmux AppImage build via Docker](https://github.com/nelsonenzo/tmux-appimage)

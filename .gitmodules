@@ -4,3 +4,6 @@
 [submodule "plugins/mitamae-plugin-resource-git_clone"]
 	path = plugins/mitamae-plugin-resource-git_clone
 	url = https://github.com/nakahiro386/mitamae-plugin-resource-git_clone.git
+[submodule "plugins/mitamae-plugin-resource-download"]
+	path = plugins/mitamae-plugin-resource-download
+	url = https://github.com/moritzheiber/mitamae-plugin-resource-download.git

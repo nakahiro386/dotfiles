@@ -1,16 +1,32 @@
+vim_url: "https://github.com/vim/vim-appimage/releases/download/v9.1.0411/Vim-v9.1.0411.glibc2.29-x86_64.AppImage"
+vim_checksum: "4bacb008d99bd03ea0854b9c4ea456650ae2d1f1777e968bfba6eed87ad644c0"
+
+gvim_url: "https://github.com/vim/vim-appimage/releases/download/v9.1.0411/GVim-v9.1.0411.glibc2.29-x86_64.AppImage"
+gvim_checksum: "26adb3ff034a9a95e4d388fd960f16f042509ae1862414c0960562e7d4bae1dd"
+
+vifm_version: "v0.13"
+vifm_checksum: "d96cf8feca95b28c8c784ca2cb50f4732c1941d0c71af8e2bcccaf1b1f042792"
+
+lazygit_version: "0.41.0"
+lazygit_checksum: "c123d810a2cfb75506f07ac0cada4da4c08ff7ac85e68bed3793c875441d8a0b"
+
+tmux_version: "3.3a"
+tmux_checksum: "ba8f457f280caacf0e6f3b3772eb84be2b47800d0b853da680cddd09c353bcc3"
+
+vim_packages: []
+
 anyenv:
+  build_envs: []
   envs:
     pyenv:
-      install: true
-      install_dependency: true
-      versions:
-        - '3.9.7'
-      global: '3.9.7'
+      install: false
+      install_dependency: false
     rbenv:
       install: false
+      install_dependency: false
     nodenv:
       install: true
       versions:
-        - '16.10.0'
-      global: '16.10.0'
+        - '20.13.1'
+      global: '20.13.1'
       plugins: []

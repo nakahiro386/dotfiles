@@ -20,7 +20,7 @@ define :vim_build do
       user user
     end
     execute "configure" do
-      command "export CFLAGS='-Wno-deprecated-declarations' && ./configure --prefix=$HOME/.local --enable-fail-if-missing --enable-luainterp=yes --enable-python3interp=yes --enable-cscope --enable-terminal --enable-autoservername --enable-multibyte --enable-fontset --with-features=huge"
+      command "export CFLAGS='-Wno-deprecated-declarations' && ./configure --prefix=$HOME/.local --enable-fail-if-missing --enable-luainterp=yes --enable-python3interp=yes --with-python3-command=/usr/bin/python3 --enable-cscope --enable-terminal --enable-autoservername --enable-multibyte --enable-fontset --with-features=huge"
       cwd make_dir
       user node[:target_user]
     end
